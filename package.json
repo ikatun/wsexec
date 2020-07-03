@@ -36,7 +36,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf build && tsc",
     "start": "tsc-watch --onSuccess 'node build'",
-    "lint": "eslint '*/**/*.{js,ts,tsx}'"
+    "lint": "eslint '*/**/*.{js,ts,tsx}'",
+    "package": "npm run build && pkg build/index.js"
   },
   "author": "",
   "license": "ISC",
