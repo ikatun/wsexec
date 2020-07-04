@@ -16,7 +16,7 @@ function handleMessage(ws: WebSocket, message: WebSocket.Data) {
     return;
   }
 
-  const process = spawn(command, args);
+  const process = spawn(command, args, { stdio: ['inherit', 'pipe', 'pipe'] });
 
   function sendData(data: any) {
     ws.send(JSON.stringify(data));
@@ -47,7 +47,6 @@ if (!AUTHORIZATION) {
 }
 
 wss.on('connection', (ws: WebSocket, req) => {
-  console.log('new connection!');
   const { url } = req;
   if (!url) {
     ws.close();
