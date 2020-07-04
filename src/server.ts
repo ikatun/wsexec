@@ -7,11 +7,13 @@ import * as WebSocket from 'ws';
 const server = http.createServer();
 const wss = new WebSocket.Server({ server });
 
+const createToken = () => cryptoRandomString({ length: 24, type: 'url-safe' }) as string;
+
 function handleMessage(ws: WebSocket, message: WebSocket.Data) {
   if (typeof message !== 'string') {
     return;
   }
-  const { command, args = [] } = JSON.parse(message);
+  const { command, args = [], token = createToken() } = JSON.parse(message);
   if (!command || typeof command !== 'string') {
     return;
   }
@@ -21,8 +23,6 @@ function handleMessage(ws: WebSocket, message: WebSocket.Data) {
   function sendData(data: any) {
     ws.send(JSON.stringify(data));
   }
-
-  const token = cryptoRandomString({ length: 24, type: 'url-safe' }) as string;
 
   process.stdout.on('data', (data) => {
     sendData({ stdoutMessage: data.toString(), token });
