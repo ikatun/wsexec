@@ -35,6 +35,10 @@ function handleMessage(ws: WebSocket, message: WebSocket.Data) {
   process.on('exit', (exitCode) => {
     sendData({ exitCode: exitCode || 0, token });
   });
+
+  process.on('error', (e) => {
+    sendData({ exitCode: -1, token, errorMessage: e.message });
+  })
 }
 
 const { AUTHORIZATION } = process.env;
@@ -43,6 +47,7 @@ if (!AUTHORIZATION) {
 }
 
 wss.on('connection', (ws: WebSocket, req) => {
+  console.log('new connection!');
   const { url } = req;
   if (!url) {
     ws.close();
@@ -61,6 +66,7 @@ wss.on('connection', (ws: WebSocket, req) => {
     try {
       handleMessage(ws, message);
     } catch (e) {
+      console.error('could not handle message :(');
       console.error(e);
     }
   });
