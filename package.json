@@ -10,7 +10,7 @@
     "express-with-json": "0.0.6",
     "lodash": "^4.17.15",
     "source-map-support": "^0.5.19",
-    "url-parse": "^1.4.7",
+    "url-parse": "^1.5.0",
     "ws": "^7.3.0"
   },
   "devDependencies": {
