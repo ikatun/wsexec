@@ -11,7 +11,7 @@
     "lodash": "^4.17.15",
     "source-map-support": "^0.5.19",
     "url-parse": "^1.4.7",
-    "ws": "^7.3.0"
+    "ws": "^7.4.6"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.157",
